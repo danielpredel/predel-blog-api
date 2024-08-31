@@ -5,7 +5,7 @@ const postSchema = new Schema({
   title: String,
   author: String,
   body: {
-    type: Object
+    type: [Object]
   },
   date: {
     type: Date

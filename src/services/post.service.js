@@ -4,6 +4,7 @@ const createPost = (title, image) => {
   const post = new Post();
   post.title = title;
   post.image = image;
+  post.hidden = true;
   return post
     .save()
     .then((savedPost) => {

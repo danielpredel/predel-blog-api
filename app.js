@@ -1,15 +1,17 @@
-var express = require("express");
-var path = require("path");
-var logger = require("morgan");
-var port = process.env.PORT || 3000;
+const express = require("express");
+const path = require("path");
+const logger = require("morgan");
+const cors = require("cors");
+const port = process.env.PORT || 3000;
 const dbConnection = require("./src/configs/db");
 dbConnection();
 
-var usersRouter = require("./src/routes/user.routes");
-var postRouter = require("./src/routes/post.routes");
+const usersRouter = require("./src/routes/user.routes");
+const postRouter = require("./src/routes/post.routes");
 
-var app = express();
+const app = express();
 
+app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -5,13 +5,13 @@ const postSchema = new Schema({
   title: String,
   author: String,
   body: {
-    type: [Object]
+    type: [Object],
   },
-  date: {
-    type: Date
-  },
+  creationDate: String,
+  publishDate: { type: String, default: "" },
+  editDate: { type: String, default: "" },
   hidden: Boolean,
-  image: String
+  image: String,
 });
 
 const postModel = mongoose.model("Post", postSchema, "posts");

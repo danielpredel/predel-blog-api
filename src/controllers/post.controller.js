@@ -1,6 +1,6 @@
 const postService = require("../services/post.service");
 
-const createPostController = (req, res) => {
+const createPost = (req, res) => {
   const title = req.body.title;
   const image = req.body.image;
   postService
@@ -14,5 +14,5 @@ const createPostController = (req, res) => {
 };
 
 module.exports = {
-  createPostController,
+  createPost,
 };

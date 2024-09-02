@@ -9,7 +9,7 @@ const createPost = (req, res) => {
       res.status(201).json({ success: true, postId });
     })
     .catch((err) => {
-      return res.status(500).json({ errors: err });
+      return res.status(500).json({ success: false, errors: err });
     });
 };
 
@@ -17,10 +17,10 @@ const getPosts = (req, res) => {
   postService
     .getPosts()
     .then((posts) => {
-      res.status(200).json({ posts });
+      res.status(200).json({ success: true, posts });
     })
     .catch((err) => {
-      res.status(500).json({ errors: err });
+      res.status(500).json({ success: false, errors: err });
     });
 };
 

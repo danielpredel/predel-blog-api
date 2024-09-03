@@ -17,7 +17,9 @@ const createPost = (title, image) => {
       return savedPost.id;
     })
     .catch((err) => {
-      throw err;
+      throw new Error(
+        "An error ocurred while creating a new post: " + err?.toString()
+      );
     });
 };
 
@@ -30,7 +32,9 @@ const getPosts = async () => {
     );
     return posts;
   } catch (err) {
-    throw err;
+    throw new Error(
+      "An error ocurred while finding public posts: " + err?.toString()
+    );
   }
 };
 

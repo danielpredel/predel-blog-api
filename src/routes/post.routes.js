@@ -7,8 +7,8 @@ const postController = require("../controllers/post.controller");
 // Return the post's ID
 router.post(
   "/",
-  validationMiddleware.newPostValidation,
-  validationMiddleware.validationErrors,
+  validationMiddleware.newPost,
+  validationMiddleware.errors,
   postController.createPost
 );
 

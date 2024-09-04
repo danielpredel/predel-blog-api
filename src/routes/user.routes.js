@@ -5,9 +5,14 @@ const router = express.Router();
 
 router.post(
   "/",
-  validationMiddleware.newUserValidation,
-  validationMiddleware.validationErrors,
+  validationMiddleware.newUser,
+  validationMiddleware.errors,
   userController.createUser
+);
+
+router.get(
+  "/check-email",
+  userController.checkEmail
 );
 
 module.exports = router;

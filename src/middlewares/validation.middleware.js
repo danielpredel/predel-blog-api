@@ -1,5 +1,6 @@
 const { body, validationResult } = require("express-validator");
 const axios = require("axios");
+const { checkEmail } = require("../services/user.service");
 
 // Post
 const newPost = [
@@ -86,7 +87,22 @@ const newUser = [
       const allowedDomains = ["gmail.com", "outlook.com"];
       return allowedDomains.includes(domain);
     })
-    .withMessage("The email domain must be google.com or outlook.com"),
+    .withMessage("The email domain must be google.com or outlook.com")
+    .custom((value) => {
+      return checkEmail(value)
+        .then((user) => {
+          if (!user) {
+            return true;
+          }
+          return Promise.reject("This email is already in use");
+        })
+        .catch((err) => {
+          return Promise.reject(
+            "An error occurred while validating the email. Please try again later"
+          );
+        });
+    })
+    .withMessage("The email is already taken"),
   body("password")
     .exists()
     .withMessage("The password is required")

@@ -8,6 +8,7 @@ dbConnection();
 
 const usersRouter = require("./src/routes/user.routes");
 const postRouter = require("./src/routes/post.routes");
+const authRouter = require("./src/routes/auth.routes");
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/users", usersRouter);
 app.use("/posts", postRouter);
+app.use("/auth", authRouter);
 
 app.listen(port, () => {
   if (process.env.ENV && process.env.ENV === "DEV") {

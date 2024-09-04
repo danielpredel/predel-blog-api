@@ -3,15 +3,7 @@ const validationMiddleware = require("../middlewares/validation.middleware");
 const router = express.Router();
 const postController = require("../controllers/post.controller");
 
-// Create a post with title and image
-// Return the post's ID
-router.post(
-  "/",
-  validationMiddleware.newPost,
-  validationMiddleware.errors,
-  postController.createPost
-);
-
+// Return public posts
 router.get("/", (req, res, next) => {
   const header = req.headers["authorization"] || "";
   const token = header.split(" ")[1];
@@ -42,5 +34,8 @@ router.get("/", (req, res, next) => {
   //   });
   // }
 });
+
+// Return public post if it exists
+router.get("/:id");
 
 module.exports = router;

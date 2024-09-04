@@ -2,7 +2,7 @@ const { body, validationResult } = require("express-validator");
 const axios = require("axios");
 
 // Post
-const newPostValidation = [
+const newPost = [
   body("title")
     .exists()
     .withMessage("The title is required")
@@ -35,7 +35,7 @@ const newPostValidation = [
 ];
 
 // Users
-const newUserValidation = [
+const newUser = [
   body("name")
     .exists()
     .withMessage("The name is required")
@@ -126,22 +126,20 @@ const newUserValidation = [
 ];
 
 // Both
-const validationErrors = (req, res, next) => {
+const errors = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res
-      .status(400)
-      .json({
-        success: false,
-        errors: errors.array(),
-        message: "The request data has errors",
-      });
+    return res.status(400).json({
+      success: false,
+      errors: errors.array(),
+      message: "The request data has errors",
+    });
   }
   next();
 };
 
 module.exports = {
-  newPostValidation,
-  newUserValidation,
-  validationErrors,
+  newPost,
+  newUser,
+  errors,
 };

@@ -13,7 +13,7 @@ const createPost = (req, res) => {
       });
     })
     .catch((err) => {
-      return res.status(500).json({
+      res.status(500).json({
         success: false,
         errors: err,
         message: "Something went wrong while creating the post",

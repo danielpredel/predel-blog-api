@@ -14,7 +14,7 @@ const createUser = (req, res) => {
     .catch((err) => {
       res.status(500).json({
         success: false,
-        errors: err,
+        errors: err.message,
         message: "Something went wrong while creating the user",
       });
     });
@@ -24,8 +24,8 @@ const checkEmail = (req, res) => {
   const { email } = req.query;
   userService
     .checkEmail(email)
-    .then((user) => {
-      if (user) {
+    .then((found) => {
+      if (found) {
         res.status(200).json({
           success: true,
           available: false,

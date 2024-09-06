@@ -15,7 +15,7 @@ const createPost = (req, res) => {
     .catch((err) => {
       res.status(500).json({
         success: false,
-        errors: err,
+        errors: err.message,
         message: "Something went wrong while creating the post",
       });
     });
@@ -34,7 +34,7 @@ const getPosts = (req, res) => {
     .catch((err) => {
       res.status(500).json({
         success: false,
-        errors: err,
+        errors: err.message,
         message: "Something went wrong while retriving the public posts",
       });
     });

@@ -1,11 +1,14 @@
 const express = require("express");
 const validationMiddleware = require("../middlewares/validation.middleware");
+const authMiddleware = require("../middlewares/auth.middleware");
 const postController = require("../controllers/post.controller");
 const router = express.Router();
 
 // Create a new post
 router.post(
   "/",
+  authMiddleware.validateToken,
+  authMiddleware.validateUser,
   validationMiddleware.newPost,
   validationMiddleware.errors,
   postController.createPost

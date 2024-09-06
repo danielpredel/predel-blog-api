@@ -13,7 +13,7 @@ const cypherPassword = (password) => {
     })
     .catch((err) => {
       throw new Error(
-        "An error ocurred while hashing the password: " + err.mesage
+        "An error ocurred while hashing the password: " + err.message
       );
     });
 };

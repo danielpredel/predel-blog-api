@@ -33,7 +33,7 @@ const getPosts = async () => {
     return posts;
   } catch (err) {
     throw new Error(
-      "An error ocurred while finding public posts: " + err.mesage
+      "An error ocurred while finding public posts: " + err.message
     );
   }
 };

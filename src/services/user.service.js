@@ -39,7 +39,7 @@ const checkEmail = async (email) => {
     return user ? true : false;
   } catch (err) {
     throw new Error(
-      "An error ocurred while checking an email address: " + err.mesage
+      "An error ocurred while checking an email address: " + err.message
     );
   }
 };
@@ -53,7 +53,7 @@ const getUserByEmail = async (email) => {
     return user;
   } catch (err) {
     throw new Error(
-      "An error ocurred while checking an email address: " + err.mesage
+      "An error ocurred while checking an email address: " + err.message
     );
   }
 };

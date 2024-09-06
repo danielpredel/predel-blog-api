@@ -3,8 +3,10 @@ const postService = require("../services/post.service");
 const createPost = (req, res) => {
   const title = req.body.title;
   const image = req.body.image;
+  const userName = req.userName;
+  const userId = req.userId;
   postService
-    .createPost(title, image)
+    .createPost(title, image, userName, userId)
     .then((postId) => {
       res.status(201).json({
         success: true,

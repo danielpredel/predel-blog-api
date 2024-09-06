@@ -11,10 +11,7 @@ const login = async (email, password) => {
     if (!match) {
       return { success: false, message: "Incorrect password" };
     }
-    const token = createToken({
-      id: user._id,
-      verified: user.verified,
-    });
+    const token = createToken(user._id, user.verified);
     return {
       success: true,
       user: { token, image: user.image, verified: user.verified },

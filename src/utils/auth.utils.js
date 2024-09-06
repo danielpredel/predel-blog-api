@@ -13,12 +13,15 @@ const cypherPassword = (password) => {
     })
     .catch((err) => {
       throw new Error(
-        "An error ocurred while hashing the password: " + err?.toString()
+        "An error ocurred while hashing the password: " + err.mesage
       );
     });
 };
 
 // Compare Password
+const comparePassword = (password, hash) => {
+  return bcrypt.compare(password, hash);
+};
 
 // Create Token
 const createToken = (payload) => {
@@ -39,4 +42,5 @@ module.exports = {
   cypherPassword,
   createVerificationCode,
   createToken,
+  comparePassword,
 };

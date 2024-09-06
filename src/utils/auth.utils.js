@@ -24,13 +24,18 @@ const comparePassword = (password, hash) => {
 };
 
 // Create Token
-const createToken = (payload) => {
+const createToken = (id, verified) => {
   const options = {
     expiresIn: "1h",
   };
 
-  const token = jwt.sign(payload, process.env.SECRET_KEY, options);
+  const token = jwt.sign({ id, verified }, process.env.SECRET_KEY, options);
   return token;
+};
+
+// Validate token
+const validateToken = (token) => {
+  return jwt.verify(token, process.env.SECRET_KEY);
 };
 
 // Create Validation Code
@@ -43,4 +48,5 @@ module.exports = {
   createVerificationCode,
   createToken,
   comparePassword,
+  validateToken,
 };

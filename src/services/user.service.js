@@ -18,10 +18,7 @@ const createUser = (name, lastname, image, email, password) => {
       return user.save();
     })
     .then((savedUser) => {
-      const token = createToken({
-        id: savedUser.id,
-        verified: savedUser.verified,
-      });
+      const token = createToken(savedUser.id, savedUser.verified);
       return {
         token,
         image: savedUser.image,
@@ -58,8 +55,23 @@ const getUserByEmail = async (email) => {
   }
 };
 
+const getUserById = async (_id) => {
+  try {
+    const user = await User.findOne(
+      { _id },
+      { name: 1, lastname: 1, verified: 1 }
+    );
+    return user;
+  } catch (err) {
+    throw new Error(
+      "An error ocurred while checking an email address: " + err.message
+    );
+  }
+};
+
 module.exports = {
   createUser,
   checkEmail,
   getUserByEmail,
+  getUserById,
 };

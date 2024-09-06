@@ -1,15 +1,11 @@
 const Post = require("../models/post.model");
-const { getCurrentDate } = require("../utils/date.utils");
 
-const createPost = (title, image) => {
+const createPost = (title, image, author, authorId, ) => {
   const post = new Post();
   post.title = title;
   post.image = image;
-  post.hidden = true;
-  //
-  post.author = "Daniel Preciado Delgadillo";
-  post.body = [];
-  post.creationDate = getCurrentDate();
+  post.author = author;
+  post.authorId = authorId;
 
   return post
     .save()

@@ -1,4 +1,3 @@
-const User = require("../models/user.model");
 const { createToken, comparePassword } = require("../utils/auth.utils");
 const userService = require("../services/user.service");
 

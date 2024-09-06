@@ -36,10 +36,24 @@ const createUser = (name, lastname, image, email, password) => {
 const checkEmail = async (email) => {
   try {
     const user = await User.findOne({ email });
+    return user ? true : false;
+  } catch (err) {
+    throw new Error(
+      "An error ocurred while checking an email address: " + err.mesage
+    );
+  }
+};
+
+const getUserByEmail = async (email) => {
+  try {
+    const user = await User.findOne(
+      { email },
+      { _id: 1, password: 1, image: 1, verified: 1 }
+    );
     return user;
   } catch (err) {
     throw new Error(
-      "An error ocurred while checking an email address: " + err?.toString()
+      "An error ocurred while checking an email address: " + err.mesage
     );
   }
 };
@@ -47,4 +61,5 @@ const checkEmail = async (email) => {
 module.exports = {
   createUser,
   checkEmail,
+  getUserByEmail,
 };

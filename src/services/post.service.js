@@ -18,7 +18,7 @@ const createPost = (title, image) => {
     })
     .catch((err) => {
       throw new Error(
-        "An error ocurred while creating a new post: " + err?.toString()
+        "An error ocurred while creating a new post: " + err.message
       );
     });
 };
@@ -33,7 +33,7 @@ const getPosts = async () => {
     return posts;
   } catch (err) {
     throw new Error(
-      "An error ocurred while finding public posts: " + err?.toString()
+      "An error ocurred while finding public posts: " + err.mesage
     );
   }
 };

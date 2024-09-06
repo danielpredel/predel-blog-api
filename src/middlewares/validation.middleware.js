@@ -141,6 +141,26 @@ const newUser = [
     .withMessage("The passwords don't match"),
 ];
 
+// Login
+const login = [
+  body("email")
+    .exists()
+    .withMessage("The email is required")
+    .isEmail()
+    .withMessage("The email address must be valid")
+    .custom((value) => {
+      const domain = value.split("@")[1]?.toLowerCase();
+      const allowedDomains = ["gmail.com", "outlook.com"];
+      return allowedDomains.includes(domain);
+    })
+    .withMessage("The email domain must be google.com or outlook.com"),
+  body("password")
+    .exists()
+    .withMessage("The password is required")
+    .isString()
+    .withMessage("The password must be a string"),
+];
+
 // Both
 const errors = (req, res, next) => {
   const errors = validationResult(req);
@@ -158,4 +178,5 @@ module.exports = {
   newPost,
   newUser,
   errors,
+  login,
 };

@@ -1,4 +1,4 @@
-const { body, validationResult } = require("express-validator");
+const { body, check, validationResult } = require("express-validator");
 const axios = require("axios");
 const { checkEmail } = require("../services/user.service");
 
@@ -9,8 +9,8 @@ const newPost = [
     .withMessage("The title is required")
     .isString()
     .withMessage("The title must be a string")
-    .isLength({ min: 5, max: 50 })
-    .withMessage("The title length must be between 5 and 50 characters")
+    .isLength({ min: 5, max: 100 })
+    .withMessage("The title length must be between 5 and 100 characters")
     .custom((value) => {
       return value.trim().length > 0;
     })
@@ -161,6 +161,9 @@ const login = [
     .withMessage("The password must be a string"),
 ];
 
+// Post Id
+const postId = [check("id").isMongoId().withMessage("Invalid id")];
+
 // Both
 const errors = (req, res, next) => {
   const errors = validationResult(req);
@@ -179,4 +182,5 @@ module.exports = {
   newUser,
   errors,
   login,
+  postId,
 };

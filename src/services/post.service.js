@@ -1,11 +1,12 @@
 const Post = require("../models/post.model");
 
-const createPost = (title, image, author, authorId) => {
+const createPost = (title, image, author, authorId, authorImage) => {
   const post = new Post();
   post.title = title;
   post.image = image;
   post.author = author;
   post.authorId = authorId;
+  post.authorImage = authorImage;
 
   return post
     .save()

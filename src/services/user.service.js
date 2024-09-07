@@ -59,7 +59,7 @@ const getUserById = async (_id) => {
   try {
     const user = await User.findOne(
       { _id },
-      { name: 1, lastname: 1, verified: 1 }
+      { name: 1, lastname: 1, verified: 1, image: 1 }
     );
     return user;
   } catch (err) {

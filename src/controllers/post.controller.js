@@ -42,7 +42,36 @@ const getPosts = (req, res) => {
     });
 };
 
+const getUserPost = (req, res) => {
+  const userId = req.userId;
+  const postId = req.params.id;
+  console.log(`User: ${userId} - postId: ${postId}`);
+  postService
+    .getUserPost(userId, postId)
+    .then((post) => {
+      if (!post) {
+        return res.status(404).json({
+          success: false,
+          message: "The post does not exist",
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        post,
+        message: "User's post retrived successfully",
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        errors: err.message,
+        message: "Something went wrong while retriving a user's post",
+      });
+    });
+};
+
 module.exports = {
   createPost,
   getPosts,
+  getUserPost,
 };

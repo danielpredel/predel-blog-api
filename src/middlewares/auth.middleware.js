@@ -19,7 +19,6 @@ const validateToken = (req, res, next) => {
 
 const validateUser = async (req, res, next) => {
   const id = req.userId;
-  console.log(id);
   try {
     const user = await getUserById(id);
     if (!user) {

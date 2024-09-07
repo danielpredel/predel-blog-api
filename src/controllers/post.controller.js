@@ -1,15 +1,19 @@
 const postService = require("../services/post.service");
+const { createToken } = require("../utils/auth.utils");
 
 const createPost = (req, res) => {
   const title = req.body.title;
   const image = req.body.image;
   const userName = req.userName;
   const userId = req.userId;
+  const userVerified = req.userVerified;
   postService
     .createPost(title, image, userName, userId)
     .then((postId) => {
+      const token = createToken(userId, userVerified);
       res.status(201).json({
         success: true,
+        token,
         postId,
         message: "New post created successfully",
       });

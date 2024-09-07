@@ -67,10 +67,35 @@ const getUserPost = async (userId, postId) => {
   }
 };
 
+const updatePost = async (postId, userId, postBody, postHidden) => {
+  try {
+    const updatedPost = await Post.findOneAndUpdate(
+      { _id: postId, authorId: userId },
+      { body: postBody, hidden: postHidden },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+    if (!updatedPost) {
+      return { success: false, message: "No post found or no update made" };
+    }
+
+    return { success: true, message: "Post successfully updated" };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Error updating post",
+      error: error.message,
+    };
+  }
+};
+
 module.exports = {
   createPost,
   getPosts,
   getPost,
   getUserPosts,
   getUserPost,
+  updatePost,
 };

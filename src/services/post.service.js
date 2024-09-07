@@ -1,6 +1,6 @@
 const Post = require("../models/post.model");
 
-const createPost = (title, image, author, authorId, ) => {
+const createPost = (title, image, author, authorId) => {
   const post = new Post();
   post.title = title;
   post.image = image;
@@ -29,7 +29,7 @@ const getPosts = async () => {
     return posts;
   } catch (err) {
     throw new Error(
-      "An error ocurred while finding public posts: " + err.message
+      "An error ocurred while searching public posts: " + err.message
     );
   }
 };
@@ -38,12 +38,39 @@ const getPosts = async () => {
 const getUserPosts = (userId) => {};
 
 // A single public post
-const getPost = (postId) => {};
+const getPost = async (postId) => {
+  try {
+    const post = await Post.findOne(
+      { _id: postId, hidden: false },
+      { _id: 1, title: 1, author: 1, publishDate: 1, image: 1 }
+    );
+    return post;
+  } catch (err) {
+    throw new Error(
+      "An error ocurred while searching for this post: " + err.message
+    );
+  }
+};
 
 // A user's post
-const getUserPost = (postId) => {};
+const getUserPost = async (userId, postId) => {
+  try {
+    const post = await Post.findOne(
+      { _id: postId, authorId: userId },
+      { title: 1, body: 1, hidden: 1 }
+    );
+    return post;
+  } catch (err) {
+    throw new Error(
+      "An error ocurred while searching for this post: " + err.message
+    );
+  }
+};
 
 module.exports = {
   createPost,
   getPosts,
+  getPost,
+  getUserPosts,
+  getUserPost,
 };

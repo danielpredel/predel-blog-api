@@ -27,6 +27,7 @@ const validateUser = async (req, res, next) => {
         .json({ success: false, message: "The user does not exist" });
     }
     req.userName = `${user.name} ${user.lastname}`;
+    req.userImage = user.image;
     next();
   } catch (err) {
     return res.status(500).json({

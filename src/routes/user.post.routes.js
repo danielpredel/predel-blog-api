@@ -36,7 +36,15 @@ router.post(
 );
 
 // Edits a post if it exists and belongs to the user
-router.patch("/:id");
+router.patch(
+  "/:id",
+  authMiddleware.validateToken,
+  authMiddleware.validateUser,
+  validationMiddleware.postId,
+  validationMiddleware.updatePost,
+  validationMiddleware.errors,
+  postController.updatePost
+);
 
 // Deltes a posts if it exists and belongs to the user
 router.delete("/:id");

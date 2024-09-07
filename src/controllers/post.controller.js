@@ -5,10 +5,11 @@ const createPost = (req, res) => {
   const title = req.body.title;
   const image = req.body.image;
   const userName = req.userName;
+  const userImage = req.userImage;
   const userId = req.userId;
   const userVerified = req.userVerified;
   postService
-    .createPost(title, image, userName, userId)
+    .createPost(title, image, userName, userId, userImage)
     .then((postId) => {
       const token = createToken(userId, userVerified);
       res.status(201).json({
@@ -49,7 +50,6 @@ const getPosts = (req, res) => {
 const getUserPost = (req, res) => {
   const userId = req.userId;
   const postId = req.params.id;
-  console.log(`User: ${userId} - postId: ${postId}`);
   postService
     .getUserPost(userId, postId)
     .then((post) => {

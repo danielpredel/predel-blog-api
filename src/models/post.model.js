@@ -11,6 +11,7 @@ const postSchema = new Schema({
   editDate: { type: Date },
   hidden: { type: Boolean, default: true },
   image: { type: String, required: true },
+  authorImage: { type: String, required: true },
 });
 
 const postModel = mongoose.model("Post", postSchema, "posts");

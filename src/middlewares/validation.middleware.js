@@ -164,6 +164,19 @@ const login = [
 // Post Id
 const postId = [check("id").isMongoId().withMessage("Invalid id")];
 
+const updatePost = [
+  body("body")
+    .exists()
+    .withMessage("The post's body is required")
+    .isArray()
+    .withMessage("The post's body must be an array"),
+  body("hidden")
+    .exists()
+    .withMessage("Hidden is required")
+    .isBoolean()
+    .withMessage("Hidden must be boolean"),
+];
+
 // Both
 const errors = (req, res, next) => {
   const errors = validationResult(req);
@@ -183,4 +196,5 @@ module.exports = {
   errors,
   login,
   postId,
+  updatePost,
 };

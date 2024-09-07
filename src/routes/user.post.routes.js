@@ -18,7 +18,14 @@ router.post(
 router.get("/");
 
 // Return a post if it exists and belongs to the user
-router.get("/:id");
+router.get(
+  "/:id",
+  authMiddleware.validateToken,
+  authMiddleware.validateUser,
+  validationMiddleware.postId,
+  validationMiddleware.errors,
+  postController.getUserPost
+);
 
 // Create a new post
 router.post(

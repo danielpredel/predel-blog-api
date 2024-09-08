@@ -35,15 +35,12 @@ const getPosts = async () => {
   }
 };
 
-// All user's posts
-const getUserPosts = (userId) => {};
-
 // A single public post
 const getPost = async (postId) => {
   try {
     const post = await Post.findOne(
       { _id: postId, hidden: false },
-      { _id: 1, title: 1, author: 1, publishDate: 1, image: 1 }
+      { title: 1, author: 1, creationDate: 1, body: 1 }
     );
     return post;
   } catch (err) {
@@ -52,6 +49,9 @@ const getPost = async (postId) => {
     );
   }
 };
+
+// All user's posts
+const getUserPosts = (userId) => {};
 
 // A user's post
 const getUserPost = async (userId, postId) => {

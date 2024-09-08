@@ -1,5 +1,6 @@
 const postService = require("../services/post.service");
 const { createToken } = require("../utils/auth.utils");
+const { getStringDate } = require("../utils/date.utils");
 
 const createPost = (req, res) => {
   const title = req.body.title;
@@ -47,6 +48,39 @@ const getPosts = (req, res) => {
     });
 };
 
+const getPost = (req, res) => {
+  const postId = req.params.id;
+  postService
+    .getPost(postId)
+    .then((post) => {
+      if (!post) {
+        return res.status(404).json({
+          success: false,
+          message: "The post does not exist",
+        });
+      }
+      const date = getStringDate(post.creationDate);
+      return res.status(200).json({
+        success: true,
+        post: {
+          _id: post.id,
+          body: post.body,
+          author: post.author,
+          title: post.title,
+          creationDate: date,
+        },
+        message: "User's post retrived successfully",
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        errors: err.message,
+        message: "Something went wrong while retriving a user's post",
+      });
+    });
+};
+
 const getUserPost = (req, res) => {
   const userId = req.userId;
   const postId = req.params.id;
@@ -87,13 +121,11 @@ const updatePost = async (req, res) => {
       return res.status(404).json(result);
     }
   } catch (error) {
-    return res
-      .status(500)
-      .json({
-        success: false,
-        message: "Internal server error",
-        error: error.message,
-      });
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+      error: error.message,
+    });
   }
 };
 
@@ -101,5 +133,6 @@ module.exports = {
   createPost,
   getPosts,
   getUserPost,
+  getPost,
   updatePost,
 };

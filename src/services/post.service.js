@@ -25,7 +25,7 @@ const getPosts = async () => {
   try {
     const posts = await Post.find(
       { hidden: false },
-      { _id: 1, title: 1, author: 1, publishDate: 1, image: 1 }
+      { _id: 1, title: 1, image: 1, author: 1, authorImage: 2 }
     );
     return posts;
   } catch (err) {

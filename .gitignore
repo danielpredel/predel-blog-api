@@ -27,3 +27,8 @@ logs
 
 # jsconfig.json
 jsconfig.json
+
+.dockerignore
+Dockerfile
+fly.toml
+.github/

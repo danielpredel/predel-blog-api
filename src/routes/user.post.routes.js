@@ -27,14 +27,6 @@ router.get(
   postController.getUserPost
 );
 
-// Create a new post
-router.post(
-  "/",
-  validationMiddleware.newPost,
-  validationMiddleware.errors,
-  postController.createPost
-);
-
 // Edits a post if it exists and belongs to the user
 router.patch(
   "/:id",

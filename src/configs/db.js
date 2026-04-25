@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@blogcluster0.nyf2cbq.mongodb.net/${process.env.DB_NAME}?appName=BlogCluster0`;
+const uri = `${process.env.MONGO_URI}`;
 
 async function connectDB() {
   try {

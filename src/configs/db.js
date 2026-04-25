@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const uri = `${process.env.MONGO_URI}`;
+const uri = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@mongo:27017/${process.env.MONGO_DB}?authSource=admin`;
 
 async function connectDB() {
   try {

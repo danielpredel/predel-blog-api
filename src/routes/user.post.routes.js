@@ -14,9 +14,6 @@ router.post(
   postController.createPost
 );
 
-// Return all users's posts
-router.get("/");
-
 // Return a post if it exists and belongs to the user
 router.get(
   "/:id",
